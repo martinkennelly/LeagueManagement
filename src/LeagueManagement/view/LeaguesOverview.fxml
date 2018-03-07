@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LeagueManagement.view.LeagueOverviewController">
+   <children>
+      <SplitPane dividerPositions="0.29797979797979796" layoutX="300.0" layoutY="210.0" prefHeight="600.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TableView fx:id="leagueTable" layoutX="55.0" layoutY="99.0" prefHeight="598.0" prefWidth="294.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="leagueName" prefWidth="75.0" text="League" />
+                        <TableColumn fx:id="numberOfParticipants" prefWidth="75.0" text="No. Participants" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <Button layoutY="572.0" mnemonicParsing="false" onAction="#handleNewLeague" prefHeight="25.0" prefWidth="154.0" text="New" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" />
+                  <Button layoutX="153.0" layoutY="572.0" mnemonicParsing="false" onAction="#handleEditLeague" prefHeight="25.0" prefWidth="141.0" text="Edit" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="1.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TableView fx:id="teamTable" layoutX="237.0" layoutY="134.0" prefHeight="600.0" prefWidth="698.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="teamName" prefWidth="75.0" text="Team" />
+                        <TableColumn fx:id="Pld" prefWidth="75.0" text="Pld" />
+                        <TableColumn fx:id="W" prefWidth="75.0" text="W" />
+                        <TableColumn fx:id="D" prefWidth="75.0" text="D" />
+                        <TableColumn fx:id="L" prefWidth="75.0" text="L" />
+                        <TableColumn fx:id="Pts" prefWidth="75.0" text="Pts" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <Button layoutX="646.0" layoutY="566.0" mnemonicParsing="false" onAction="#handleFixtureAdd" prefHeight="25.0" prefWidth="141.0" text="Add Fixture Result" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="1.0" />
+                  <Button layoutX="415.0" layoutY="572.0" mnemonicParsing="false" onAction="#handleNewParticipant" prefHeight="25.0" prefWidth="141.0" text="Add Participant" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="142.0" />
+                  <Button layoutX="274.0" layoutY="572.0" mnemonicParsing="false" onAction="#handleEditParticipant" prefHeight="25.0" prefWidth="141.0" text="Edit Participant" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="283.0" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
