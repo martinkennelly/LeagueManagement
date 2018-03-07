@@ -231,4 +231,16 @@ public class League {
         }
         return result;
     }
+
+    public void updateFixturesNames() {
+        for (Participant participant : this.getParticipantData()) {
+            for (Fixture fixture : this.getFixtureData()) {
+                if (participant.getParticipantId() == fixture.getAwayId() && !participant.getParticipantName().equals(fixture.getAwayParticipantName())) {
+                    fixture.setAwayParticipantName(participant.getParticipantName());
+                } else if (participant.getParticipantId() == fixture.getHomeId() && !participant.getParticipantName().equals(fixture.getHomeParticipantName())) {
+                    fixture.setHomeParticipantName(participant.getParticipantName());
+                }
+            }
+        }
+    }
 }

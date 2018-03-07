@@ -203,6 +203,7 @@ public class MainApp extends Application {
             controller.setDialogStage(diaglogStage);
             controller.setParticipantName(participant);
             diaglogStage.showAndWait();
+
             return controller.isOkClicked();
         } catch (IOException iox) {
             return false;

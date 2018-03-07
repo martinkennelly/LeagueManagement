@@ -102,8 +102,11 @@ public class LeagueOverviewController {
         if (selectedParticipant != null) {
             boolean okClicked = mainApp.showParticipantEditDialog(selectedParticipant);
             if (okClicked) {
+                League selectedLeague = leagueTable.getSelectionModel().getSelectedItem();
+                selectedLeague.updateFixturesNames();
                 leagueTable.refresh();
                 teamTable.refresh();
+
             }
         }
     }
