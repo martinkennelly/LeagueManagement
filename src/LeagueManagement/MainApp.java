@@ -1,10 +1,7 @@
 package LeagueManagement;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
 import LeagueManagement.model.Administrator;
+import LeagueManagement.model.League;
 import LeagueManagement.model.Fixture;
 import LeagueManagement.model.Participant;
 import LeagueManagement.utilities.CSVUtils;
@@ -21,8 +18,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import LeagueManagement.model.League;
 import javafx.stage.WindowEvent;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainApp extends Application {
     private Stage primaryStage;
