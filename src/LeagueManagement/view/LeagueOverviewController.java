@@ -102,6 +102,7 @@ public class LeagueOverviewController {
         if (selectedParticipant != null) {
             boolean okClicked = mainApp.showParticipantEditDialog(selectedParticipant);
             if (okClicked) {
+                leagueTable.refresh();
                 teamTable.refresh();
             }
         }

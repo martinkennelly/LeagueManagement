@@ -37,6 +37,7 @@ public class League {
 
     //Generate simple fixtures todo
     public void generateFixtures() {
+        fixtureData.clear();
         //todo ~ better implememt
         int numberOfTeams = participantData.size();
         int totalRounds = numberOfTeams - 1;

@@ -42,7 +42,12 @@ public class FixtureAddController  {
 
     public void setLeague(League league) {
         this.league = league;
-        fixtureTable.setItems(league.getFixtureData());
+        if (league.getFixtureData().isEmpty()) {
+            league.generateFixtures();
+            fixtureTable.setItems(league.getFixtureData());
+        } else {
+            fixtureTable.setItems(league.getFixtureData());
+        }
     }
 
     @FXML

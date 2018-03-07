@@ -51,7 +51,6 @@ public class ParticipantAddDialogController {
             }
             okClicked = true;
             league.fixtureData.clear();
-            league.generateFixtures();
             dialogStage.close();
         }
     }
@@ -70,7 +69,6 @@ public class ParticipantAddDialogController {
         }
         return max;
     }
-
 
     private boolean isInputValid() {
         String errorMsg = "";
@@ -92,15 +90,14 @@ public class ParticipantAddDialogController {
     }
 
     private boolean areYouSure() {
-        boolean proceed = false;
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
         alert.setHeaderText("If you proceed, all results will be lost");
         alert.setContentText("Are you ok with this?");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            proceed = true;
+            return true;
         }
-        return proceed;
+        return false;
     }
 }
