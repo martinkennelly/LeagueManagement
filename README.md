@@ -1,8 +1,22 @@
 # LeagueManagement
-League Management GUI
-## Screens
+
+#### Two Applications
+
+| App Name        | Function           | User  |
+| ------------- |:-------------:| -----:|
+| CreateUserApp      | Create accounts for product customer | Product Administrator |
+| MainApp      | Customer administration      |   Customer |
+
+## Application Screenshots
+### CreateUserApp
+
+#### Create User Account Application
+
+![alt text](images/create_new_User.png "Creare User window")
+
+### MainApp
 #### Login
-![alt text](images/blank_main.png "Login window")
+![alt text](images/login.png "Login window")
 
 #### Main Window (no data)
 ![alt text](images/blank_main.png "Main window")

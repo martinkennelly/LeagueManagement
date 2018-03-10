@@ -57,9 +57,9 @@ public class MainApp extends Application {
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(primaryStage);
-            alert.setTitle("Missing Administrator File");
+            alert.setTitle("No user accounts found!");
             alert.setHeaderText("Contact admin");
-            alert.setContentText("Please contact admin and tell him to do his job");
+            alert.setContentText("Please get your product admin to create a user account");
             alert.showAndWait();
             primaryStage.close();
         }
