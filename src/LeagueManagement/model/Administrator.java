@@ -22,5 +22,4 @@ public class Administrator {
     public String getPasswordHash() {
         return this.passwordHash;
     }
-
 }

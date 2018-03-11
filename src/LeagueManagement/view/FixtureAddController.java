@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-
 public class FixtureAddController  {
     @FXML
     private TableView<Fixture> fixtureTable;
@@ -29,8 +28,7 @@ public class FixtureAddController  {
     private boolean isCloseClicked = false;
 
     @FXML
-    public void initialize() {
-    }
+    public void initialize() { }
 
     public boolean isCloseClicked(){
         return this.isCloseClicked;

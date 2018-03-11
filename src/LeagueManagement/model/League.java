@@ -17,6 +17,9 @@ public class League {
     private final IntegerProperty leagueId;
     private final IntegerProperty adminId;
     private boolean hasResults = false;
+    private String fixtureFileNameEnding = "Fixtures.csv";
+    private String resultsFileNameEnding = "Results.csv";
+    private String partisipantsFileNameEnding = "Partisipants.csv";
 
     public League(String leagueName, int numberOfParticipants, int leagueId, int adminId) {
         this.leagueName = new SimpleStringProperty(leagueName);
@@ -24,21 +27,11 @@ public class League {
         this.leagueId = new SimpleIntegerProperty(leagueId);
         this.adminId = new SimpleIntegerProperty(adminId);
     }
-    //Just for testing, delete later
-    public void generateDummyParticipants() {
-        int amount = this.numberOfParticipants.get();
-        if (amount % 2 == 1) {
-            amount++;
-        }
-        for (int i = 0; i < amount; i++) {
-            participantData.add(new Participant("Participant " + (i + 1),i+1));
-        }
-    }
 
-    //Generate simple fixtures todo
+    //todo: Generate simple fixtures
     public void generateFixtures() {
         fixtureData.clear();
-        //todo ~ better implememt
+        //todo: implement better
         int numberOfTeams = participantData.size();
         int totalRounds = numberOfTeams - 1;
         int matchesPerRound = numberOfTeams / 2;
@@ -52,10 +45,8 @@ public class League {
                     away = numberOfTeams - 1;
                 }
                 rounds[round][match] = (home + 1) + " v " + (away + 1);
-
             }
         }
-
         //Interleaved
         String[][] interleaved = new String[totalRounds][matchesPerRound];
         int even = 0;
@@ -184,33 +175,44 @@ public class League {
         this.hasResults = hasResults;
     }
 
-    public void takeADump() {
-        File file = new File(this.getLeagueId().get() + "_Fixtures.csv");
+    public void dumpInformationToFiles() {
         StringBuilder sb = new StringBuilder();
+        File file = buildFileObj(League.this.fixtureFileNameEnding);
 
         if (fixtureData.size() != 0) {
             for (Fixture fixture : fixtureData) {
                 sb.append(fixture.getFixtureId() + "," + fixture.getHomeId() + "," + fixture.getAwayId() + "\r\n");
             }
-            FileUtils.writeFile(file,sb.substring(0, sb.length()-2));
+            writeOutput(file,sb);
         }
-        sb.delete(0,sb.length());
-        file = new File(this.getLeagueId().get() + "_Partisipants.csv");
+        clearStringBuilder(sb);
+        file = buildFileObj(League.this.partisipantsFileNameEnding);
         if (participantData.size() != 0) {
             for (Participant participant : participantData) {
                 sb.append(participant.getParticipantId() + "," + participant.getParticipantName() + "\r\n");
             }
-            FileUtils.writeFile(file,sb.substring(0,sb.length() - 2));
+            writeOutput(file,sb);
         }
-        sb.delete(0,sb.length());
-        file = new File(this.getLeagueId().get() + "_Results.csv");
+        clearStringBuilder(sb);
+        file = buildFileObj(League.this.resultsFileNameEnding);
         if (fixtureData.size() != 0) {
             for (Fixture fixture : fixtureData) {
                 sb.append(fixture.getFixtureId() + "," + fixture.getHomeResult() + "," + fixture.getAwayResult() + "\r\n");
             }
-            FileUtils.writeFile(file,sb.substring(0,sb.length()- 2));
+            writeOutput(file,sb);
         }
+    }
 
+    private void writeOutput(File file, StringBuilder sb) {
+        FileUtils.writeFile(file, sb.substring(0, sb.length() - 2));
+    }
+
+    private File buildFileObj(String fileEndingName) {
+        return new File(League.this.getLeagueId().get() + "_" + fileEndingName);
+    }
+
+    private void clearStringBuilder(StringBuilder sb)  {
+        sb.delete(0, sb.length());
     }
 
     public void addParticipant(Participant participant) {

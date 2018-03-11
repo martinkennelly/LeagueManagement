@@ -1,20 +1,15 @@
 package LeagueManagement.view;
 
-import LeagueManagement.CreateUserApp;
 import LeagueManagement.model.Administrator;
 import LeagueManagement.utilities.CSVUtils;
 import LeagueManagement.utilities.FileUtils;
 import LeagueManagement.utilities.Password;
 import LeagueManagement.utilities.StringUtils;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-
 import javax.swing.*;
 import java.io.File;
 import java.net.URL;
@@ -29,12 +24,12 @@ public class CreateUserDialogController implements Initializable{
     @FXML
     private Button submitButton;
     private ArrayList<Administrator> administratorData;
+    private String administratorsFileName = "Administrators.csv";
+
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources) { }
 
-    }
-
-    public void setAdministratorData(ArrayList<Administrator> administratorData) {
+    public void setAdministratorDataAndLoad(ArrayList<Administrator> administratorData) {
         this.administratorData = administratorData;
         loadAdministratorFile();
     }
@@ -49,6 +44,7 @@ public class CreateUserDialogController implements Initializable{
                 try {
                     administrator = new Administrator(getNextAdministratorId(), username, Password.getSaltedHash(password));
                 } catch (Exception e) {
+                    FileUtils.appendLineToEndOfFile(new File("log.txt"),"Error: Couldnt hash user " + username + " and now users password is plaintext.\r\n");
                     administrator = new Administrator(getNextAdministratorId(), username, password);
                 }
                 this.administratorData.add(administrator);
@@ -109,9 +105,8 @@ public class CreateUserDialogController implements Initializable{
         return isValid;
     }
 
-    private boolean loadAdministratorFile() {
-        boolean isSuccessful = false;
-        File file = new File("Administrators.csv");
+    private void loadAdministratorFile() {
+        File file = new File(this.administratorsFileName);
         if (FileUtils.checkExists(file)) {
             ArrayList<ArrayList<String>> adminFile =  CSVUtils.readInCSV(file,true);
             Administrator newAdmin;
@@ -120,18 +115,19 @@ public class CreateUserDialogController implements Initializable{
                     try {
                         newAdmin = new Administrator(Integer.parseInt(row.get(0)),row.get(1),row.get(2));
                         administratorData.add(newAdmin);
-                        isSuccessful = true;
-                    } catch (NumberFormatException e) {throw new RuntimeException("Corrupted admin file: " + e.getLocalizedMessage());}
+                    } catch (NumberFormatException e) {
+                        FileUtils.appendLineToEndOfFile(new File("log.txt"),"Error: Corrupted administration file\r\n");
+                        throw new RuntimeException("Corrupted administration file");}
                 } else {
-                    throw new RuntimeException("Corrupted admin file");
+                    FileUtils.appendLineToEndOfFile(new File("log.txt"),"Error: Corrupted administration file\r\n");
+                    throw new RuntimeException("Corrupted administration file");
                 }
             }
         }
-        return isSuccessful;
     }
 
-    public void takeADump() {
-        File administratorFile = new File("Administrators.csv");
+    public void outputAdministratorsToFile() {
+        File administratorFile = new File(this.administratorsFileName);
         StringBuilder sb = new StringBuilder();
         if (this.administratorData.size() != 0) {
             for (Administrator administrator : this.administratorData) {

@@ -46,7 +46,7 @@ public class ParticipantAddDialogController {
             league.getParticipantData().add(new Participant(participantNameField.getText(),getMaxParticipantId() + 1));
             league.setNumberOfParticipants(league.getNumberOfParticipants() + 1);
             if (league.getNumberOfParticipants() % 2 == 1) {
-                league.getParticipantData().add(new Participant("RENAME - EVEN NO. TEAMS ONLY",getMaxParticipantId() + 1));
+                league.getParticipantData().add(new Participant("RENAME - EVEN NUMBER OF TEAMS ONLY",getMaxParticipantId() + 1));
                 league.setNumberOfParticipants(league.getNumberOfParticipants() + 1);
             }
             okClicked = true;

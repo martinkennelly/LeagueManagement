@@ -5,14 +5,13 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Participant {
-    public final StringProperty participantName;
-    public final IntegerProperty participantId;
-    public final IntegerProperty W = new SimpleIntegerProperty(0);
-    public final IntegerProperty D = new SimpleIntegerProperty(0);
-    public final IntegerProperty L = new SimpleIntegerProperty(0);
-    public final IntegerProperty Pts = new SimpleIntegerProperty(0);
-    public final IntegerProperty Pld = new SimpleIntegerProperty(0);
-
+    private final StringProperty participantName;
+    private final IntegerProperty participantId;
+    private final IntegerProperty W = new SimpleIntegerProperty(0);
+    private final IntegerProperty D = new SimpleIntegerProperty(0);
+    private final IntegerProperty L = new SimpleIntegerProperty(0);
+    private final IntegerProperty Pts = new SimpleIntegerProperty(0);
+    private final IntegerProperty Pld = new SimpleIntegerProperty(0);
 
     public Participant(String participantName, int participantId) {
         this.participantName = new SimpleStringProperty(participantName);
@@ -119,5 +118,4 @@ public class Participant {
         this.D.set(0);
         this.L.set(0);
     }
-
 }

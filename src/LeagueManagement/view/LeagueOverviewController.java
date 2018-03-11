@@ -34,6 +34,7 @@ public class LeagueOverviewController {
     private TableColumn<Participant,Integer> Pld;
     private MainApp mainApp;
     private ObservableList<League> administratorOwnedLeagues;
+    private final String leagueCSVFileName = "Leagues.csv";
 
     public LeagueOverviewController() { }
 
@@ -137,10 +138,10 @@ public class LeagueOverviewController {
     }
 
     public void saveChanges() {
-        File file = new File("Leagues.csv");
+        File file = new File(this.leagueCSVFileName);
         String leagueFileData = "";
         for (League league : mainApp.getLeagueData()) {
-            league.takeADump();
+            league.dumpInformationToFiles();
             leagueFileData += league.getLeagueId().get() + "," + league.getLeagueName() + "," + league.getAdminId().get() + "\r\n";
         }
         if (!leagueFileData.isEmpty()) {

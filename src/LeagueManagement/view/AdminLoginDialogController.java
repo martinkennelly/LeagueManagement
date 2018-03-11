@@ -2,6 +2,7 @@ package LeagueManagement.view;
 
 import LeagueManagement.MainApp;
 import LeagueManagement.model.Administrator;
+import LeagueManagement.utilities.FileUtils;
 import LeagueManagement.utilities.Password;
 import LeagueManagement.utilities.StringUtils;
 import javafx.collections.ObservableList;
@@ -11,8 +12,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import java.io.File;
 import java.util.Optional;
-
 
 public class AdminLoginDialogController {
     @FXML
@@ -61,31 +62,33 @@ public class AdminLoginDialogController {
                 }
 
             } else {
+                FileUtils.appendLineToEndOfFile(new File("log.txt"),"Caution: User tried to log in but no users are created.\r\n");
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.initOwner(dialogStage);
                 alert.setTitle("Please contact Software Administrator");
-                alert.setHeaderText("Ask software Administor to create your account");
+                alert.setHeaderText("Ask software Administrator to create your account");
                 alert.setContentText("Contact administrator to create an account for you!");
                 alert.showAndWait();
             }
-
-        }
-        if (okToContinue) {
-            loginClicked = true;
-            dialogStage.close();
-        } else {
-            this.numberOfLoginAttempts++;
-            if (this.numberOfLoginAttempts >= 3) {
+            if (okToContinue) {
+                loginClicked = true;
                 dialogStage.close();
             } else {
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.initOwner(dialogStage);
-                alert.setTitle("Wrong Credentials");
-                alert.setHeaderText("Incorrect login information");
-                alert.setContentText("Try again!...but you only have " + (3 - this.numberOfLoginAttempts) + "  attempts left!!");
-                alert.showAndWait();
-                passwordField.clear();
+                this.numberOfLoginAttempts++;
+                if (this.numberOfLoginAttempts >= 3) {
+                    FileUtils.appendLineToEndOfFile(new File("log.txt"),"Caution: User that used username " + this.usernameField.getText() + " tried to login multiple times and failed.\r\n");
+                    dialogStage.close();
+                } else {
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.initOwner(dialogStage);
+                    alert.setTitle("Wrong Credentials");
+                    alert.setHeaderText("Incorrect login information");
+                    alert.setContentText("Try again!...but you only have " + (3 - this.numberOfLoginAttempts) + "  attempts left!!");
+                    alert.showAndWait();
+                    passwordField.clear();
+                }
             }
+
         }
     }
 

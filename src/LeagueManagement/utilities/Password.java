@@ -12,7 +12,6 @@ import org.apache.commons.codec.binary.Base64;
  * Robbed it from somewhere but dont know where, must get reference. Have used it in test programs
  */
 public class Password {
-
     private final static int iterations = 20 * 2000;
     private final static int saltLen = 20;
     private final static int desiredKeyLen = 256;

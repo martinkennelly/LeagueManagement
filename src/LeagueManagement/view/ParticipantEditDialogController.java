@@ -45,12 +45,13 @@ public class ParticipantEditDialogController {
     }
 
     private boolean isInputValid() {
+        boolean isValid = false;
         String errorMsg = "";
         if (participantNameField.getText() == null || participantNameField.getText().length() == 0) {
             errorMsg += "Incorrect participant name\n";
         }
         if (errorMsg.length() == 0) {
-            return true;
+            isValid = true;
         } else {
             Alert alert = new Alert(AlertType.ERROR);
             alert.initOwner(dialogStage);
@@ -58,7 +59,8 @@ public class ParticipantEditDialogController {
             alert.setHeaderText("Correct input box");
             alert.setContentText(errorMsg);
             alert.showAndWait();
-            return false;
+            isValid = false;
         }
+        return isValid;
     }
 }
